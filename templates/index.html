@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block head %}
+{% endblock %}
+{% block content %}
+<h1>Some Buttons</h1>
+<p class="important">
+    Internal LED
+</p><br>
+<!-- <img src={{imgsrc}} alt="ur internet too slow" width="220" height="220"> -->
+<p>{{res}}</p>
+
+<label class="switch">
+    <input id="led" type="checkbox" onchange="check_input(this)">
+    <div class="slider"></div>
+</label>
+
+<label class="switch">
+    <input id="D0" type="checkbox" onclick="check_input(this)">
+    <div class="slider"></div>
+</label>
+
+{% endblock %}
