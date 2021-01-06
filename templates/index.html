@@ -2,12 +2,9 @@
 {% block head %}
 {% endblock %}
 {% block content %}
-<h1>Some heading </h1>
-<p class="important">
-    Devices
-</p><br>
-
-<div id="node0">
+<h1>Devices </h1><br>
+<p>Node 0</p>
+<div id="node0" class="nodes">
     <label class="switch">
         <input id="D0" type="checkbox" onclick="check_input(this)">
         <div class="slider"></div>
@@ -33,4 +30,33 @@
         <div class="slider"></div>
     </label>
 </div>
+<br><br>
+<p>Node 1</p>
+<div id="node1" class="nodes">
+    <label class="switch">
+        <input id="D0" type="checkbox" onclick="check_input(this)">
+        <div class="slider"></div>
+    </label>
+    &emsp13;
+    <label class="switch">
+        <input id="D1" type="checkbox" onclick="check_input(this)">
+        <div class="slider"></div>
+    </label>
+    &emsp13;
+    <label class="switch">
+        <input id="D2" type="checkbox" onclick="check_input(this)">
+        <div class="slider"></div>
+    </label>
+    &emsp13;
+    <label class="switch">
+        <input id="D3" type="checkbox" onclick="check_input(this)">
+        <div class="slider"></div>
+    </label>
+    &emsp13;
+    <label class="switch">
+        <input id="D4" type="checkbox" onclick="check_input(this)">
+        <div class="slider"></div>
+    </label>
+</div>
+
 {% endblock %}

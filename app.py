@@ -9,51 +9,41 @@ def not_found(e):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
-
-#internal led routes
-@app.route('/led/<led>')
-def device(led=None):
-    if led not in ("on","off","sync"): #valid urls
-        abort(404)
-    try:
-        node_code="node1"
-        node=get_node_status(node_code)
-        if led=='sync':
-            return node['led']
-        url=f"http://{node['ip']}/{led}"
-        res=requests.get(url,timeout=3)
-        update_node(node_code,'led',res.text.lower())
-        return res.text.lower()
-    except:
-        update_node(node_code,'led','off')
-        return "invalid device"
+    return render_template('index.html')        
 
 @app.route('/newdevice/<ip>')
 def newdevice(ip=None):
     print(ip)
     return "added"
 
-
-@app.route('/api/v1/update',methods = ['POST'])
+@app.route('/api/v1/update',methods = ['GET','POST'])
 def update():
-    if not request.json:
-        abort(400)
-    req_data=request.json
-    print(req_data)
-    node_number=int(req_data['node'][-1])
-    with open('devicesss.json','r') as devices:
-        devices_json=json.load(devices)
-        device=devices_json['nodes'][node_number]
-    try:
-        url=f"http://{device['ip']}/{req_data['status']}"
-        requests.get(url,timeout=3)
-    except:
-        return "invalid device"
-    devices_json['nodes'][node_number][req_data['pin']]=req_data['status']
-    with open('devicesss.json','w') as devices:
-        json.dump(devices_json, devices)
-    return req_data['status']
+    if request.method=='GET':
+        with open('devicesss.json','r') as devices:
+            return json.load(devices)
+    if request.method == 'POST':
+        if not request.json:
+            abort(400)
+        req_data=request.json
+        #print(req_data)
+        node_number=int(req_data['node'][-1])
+        with open('devicesss.json','r') as devices:
+            devices_json=json.load(devices)
+            device=devices_json['nodes'][node_number]
+        try:
+            url=f"http://{device['ip']}/{req_data['status']}" # pin to be added later
+            requests.get(url,timeout=3)
+            device_status="reachable"
+        except:
+            device_status= "unreachable"
+        if device_status=="reachable":
+            devices_json['nodes'][node_number][req_data['pin']]=req_data['status']
+        else:
+            devices_json['nodes'][node_number][req_data['pin']]="off"
+            req_data['status']=device_status
+        with open('devicesss.json','w') as devices:
+            json.dump(devices_json, devices)
+        return req_data['status']
 
 
 def get_node_status(node):
