@@ -2,21 +2,35 @@
 {% block head %}
 {% endblock %}
 {% block content %}
-<h1>Some Buttons</h1>
+<h1>Some heading </h1>
 <p class="important">
-    Internal LED
+    Devices
 </p><br>
-<!-- <img src={{imgsrc}} alt="ur internet too slow" width="220" height="220"> -->
-<p>{{res}}</p>
 
-<label class="switch">
-    <input id="led" type="checkbox" onchange="check_input(this)">
-    <div class="slider"></div>
-</label>
-
-<label class="switch">
-    <input id="D0" type="checkbox" onclick="check_input(this)">
-    <div class="slider"></div>
-</label>
-
+<div id="node0">
+    <label class="switch">
+        <input id="D0" type="checkbox" onclick="check_input(this)">
+        <div class="slider"></div>
+    </label>
+    &emsp13;
+    <label class="switch">
+        <input id="D1" type="checkbox" onclick="check_input(this)">
+        <div class="slider"></div>
+    </label>
+    &emsp13;
+    <label class="switch">
+        <input id="D2" type="checkbox" onclick="check_input(this)">
+        <div class="slider"></div>
+    </label>
+    &emsp13;
+    <label class="switch">
+        <input id="D3" type="checkbox" onclick="check_input(this)">
+        <div class="slider"></div>
+    </label>
+    &emsp13;
+    <label class="switch">
+        <input id="D4" type="checkbox" onclick="check_input(this)">
+        <div class="slider"></div>
+    </label>
+</div>
 {% endblock %}
