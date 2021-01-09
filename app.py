@@ -11,9 +11,15 @@ def not_found(e):
 def index():
     return render_template('index.html')        
 
-@app.route('/newdevice/<ip>')
-def newdevice(ip=None):
-    print(ip)
+@app.route('/newdevice/<device>')
+def newdevice(device=None):
+    node_number,ip = device.split("&")
+    node_number=int(node_number[-1])
+    with open('devicesss.json','r') as devices:
+        devices_json=json.load(devices)
+        devices_json['nodes'][node_number]['ip']=ip+":301"
+    with open('devicesss.json','w') as devices:
+        json.dump(devices_json, devices)
     return "added"
 
 @app.route('/api/v1/update',methods = ['GET','POST'])
@@ -31,7 +37,7 @@ def update():
             devices_json=json.load(devices)
             device=devices_json['nodes'][node_number]
         try:
-            url=f"http://{device['ip']}/{req_data['status']}" # pin to be added later
+            url=f"http://{device['ip']}/{req_data['pin']}/{req_data['status']}" 
             requests.get(url,timeout=3)
             device_status="reachable"
         except:
