@@ -84,3 +84,9 @@ function changebtn(res, ele) {
         ele.checked = false;
     }
 }
+
+//set camera
+function setcam(ele) {
+    live_feed=document.getElementById("live_feed")
+    live_feed.setAttribute("src","/video_feed/"+ele.id)
+}

@@ -60,8 +60,13 @@
 </div>
 
 <br><br>
-<p>Live Streaming</p>
-<div id="cam1" class="cam">
-    <img src="{{ url_for('video_feed') }}" width="50%">
-</div>
+<p>Cameras</p>
+<div class="cam">
+    <button id="cam1" class="button button5" onclick=setcam(this)>CAM 1</button>
+    <button id="cam2" class="button button5" onclick=setcam(this)>CAM 2</button>
+    <button id="cam3" class="button button5" onclick=setcam(this)>CAM 3</button>
+    <button id="cam4" class="button button5" onclick=setcam(this)>CAM 4</button>
+    <button id="cam5" class="button button5" onclick=setcam(this)>CAM 5</button>
+    <br><img id="live_feed" src="" alt="" width="50%">
+</div><br>
 {% endblock %}

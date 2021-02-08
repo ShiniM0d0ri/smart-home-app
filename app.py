@@ -4,6 +4,7 @@ import cv2
  
 app = Flask(__name__)
 
+#generate images for video_feed route
 camera = cv2.VideoCapture(0)
 def gen_frames():  
     while True:
@@ -66,9 +67,10 @@ def update():
         return req_data['status']
 
 
-@app.route('/video_feed')
-def video_feed():
-    return Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
+@app.route('/video_feed/<cam>')
+def video_feed(cam):
+    if cam=="cam1":
+        return Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 if __name__=="__main__":
     app.run(host='0.0.0.0',port=5000)
