@@ -5,8 +5,7 @@ import cv2
 app = Flask(__name__)
 
 #generate images for video_feed route
-camera = cv2.VideoCapture(0)
-def gen_frames():  
+def gen_frames(camera):  
     while True:
         success, frame = camera.read()  # read the camera frame
         if not success:
@@ -69,8 +68,10 @@ def update():
 
 @app.route('/video_feed/<cam>')
 def video_feed(cam):
-    if cam=="cam1":
-        return Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
+    with open("devicesss.json","r") as devices:
+        cc=json.load(devices)["cams"][int(cam[3:])-1]
+    camera = cv2.VideoCapture(cc['ip'])
+    return Response(gen_frames(camera), mimetype='multipart/x-mixed-replace; boundary=frame')    
 
 if __name__=="__main__":
     app.run(host='0.0.0.0',port=5000)
