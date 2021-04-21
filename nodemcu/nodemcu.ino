@@ -1,8 +1,8 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
 
-const char* ssid = "xxxxxxxx";
-const char* password = "xxxxxxxx";
+const char* ssid = "xxxxx";
+const char* password = "xxxxx";
 const char* host = "192.168.1.3"; //it will tell you the IP once it starts up
 //just write it here afterwards and upload
 int ledPin = D0;
@@ -50,7 +50,7 @@ void setup() {
 
   // send ip to me
   HTTPClient http; //Object of class HTTPClient
-  String url = "http://192.168.1.8:5000/newdevice/"; // enter your flask server's local ip
+  String url = "http://192.168.1.7:5000/newdevice/"; // enter your flask server's local ip
   url+="node0&";
   url+=local_ip;
   Serial.println(local_ip);

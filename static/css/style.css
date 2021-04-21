@@ -1,8 +1,22 @@
 body {
   /*background-image: url("https://thumbs.gfycat.com/EnragedRepentantDesertpupfish-small.gif");*/
-  background-color:	#2d2d2d;
-  color:	#ffffff;
+  text-align: center;
 }
+
+#header {
+  text-align: center;
+  font-weight: 20;
+}
+
+#index {
+  margin: 0px;
+  text-align: center;
+}
+
+#row1 {
+            font-size: 24px;
+            font-weight: lighter;
+        }
 
 .button {
   background-color: #4CAF50; /* Green */
