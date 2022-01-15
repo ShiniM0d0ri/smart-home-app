@@ -1,6 +1,7 @@
-from flask import Flask,render_template,url_for,abort,request,redirect,Response
+from flask import Flask,render_template,url_for,abort,request,redirect,Response,send_file
 import requests,json
 import cv2
+from motion import motion_detect
  
 app = Flask(__name__)
 
@@ -71,8 +72,13 @@ def update():
 def video_feed(cam):
     with open("devicesss.json","r") as devices:
         cc=json.load(devices)["cams"][int(cam[3:])-1]
-    camera = cv2.VideoCapture(cc['ip'])
-    return Response(gen_frames(camera), mimetype='multipart/x-mixed-replace; boundary=frame')    
+    if cc['status']=='on':
+        camera = cv2.VideoCapture(cc['ip'])
+        return Response(motion_detect(camera), mimetype='multipart/x-mixed-replace; boundary=frame')
+    else:
+        print(f'no {cam} found')
+        #return Response(url_for('static', filename='noimage.png'), mimetype='image/png; boundary=frame')
+        return send_file('static\\noimage.png',mimetype='image/png')
 
 if __name__=="__main__":
     app.run(host='0.0.0.0',port=5000)
